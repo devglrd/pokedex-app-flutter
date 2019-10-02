@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokemon/pokemon.dart';
 import 'package:pokemon/pokemonDetail.dart';
+import 'search.dart';
 
 void main() => runApp(MyApp());
 
@@ -41,8 +42,16 @@ class _HomePageState extends State<HomePage> {
     var res = await http.get(url);
     var decodedJson = jsonDecode(res.body);
     pokeHub = PokeHub.fromJson(decodedJson);
-    print(pokeHub.toJson());
     setState(() {});
+  }
+
+  _selectedSearch(Pokemon pokemon) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => PokemonDetail(
+                  pokemon: pokemon,
+                )));
   }
 
   @override
@@ -50,6 +59,17 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Poke App'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showSearch(
+                  context: context,
+                  delegate: DataSearch(pokeHub == null ? [] : pokeHub.pokemon,
+                      (pokemon) => _selectedSearch(pokemon)));
+            },
+          )
+        ],
         backgroundColor: Colors.cyan,
       ),
       body: pokeHub == null
