@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -88,7 +87,6 @@ class PokemonListPage extends StatefulWidget {
 }
 
 class _PokemonListPageState extends State<PokemonListPage> {
-  final PokemonBloc pokeBloc = PokemonBloc();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -170,51 +168,3 @@ class PokeCard extends StatelessWidget {
     );
   }
 }
-
-/*pokeHub == null
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : GridView.count(
-                crossAxisCount: 2,
-                children: pokeHub.pokemon
-                    .map((poke) => Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: InkWell(
-                            onTap: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => PokemonDetail(
-                                            pokemon: poke,
-                                          )))
-                            },
-                            child: Hero(
-                              tag: poke.img,
-                              child: Card(
-                                elevation: 3.0,
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Container(
-                                      height: 100.0,
-                                      width: 100.0,
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                              image: NetworkImage(poke.img))),
-                                    ),
-                                    Text(
-                                      poke.name,
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ))
-                    .toList(),
-              ),*/
